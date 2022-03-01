@@ -1,7 +1,7 @@
 def test_avl():
     dict_words = {}
 
-    with open("words_alpha.txt", "r") as file:
+    with open("test.txt", "r") as file:
         for line in file:
             word = line.rstrip('\n')
             if len(word) >= 3:
@@ -17,16 +17,20 @@ def test_avl():
     print(word_list)
 
 def get_word_list(dict_words, word, word_list):
-    
+    print(dict_words)
     for letter in dict_words.keys():
         if letter == "word":
-            word_list.append(word)
+            if dict_words[letter] == True:
+                word_list.append(word)
         else:
             get_word_list(dict_words[letter], word + letter, word_list)
 
 
 def add_to_avl(dict_words, new_word):
 
+    # print(f"dict: {dict_words}")
+    # print(f"word: {new_word}")
+    
     if new_word == None:
         dict_words["word"] = True
     
@@ -34,7 +38,7 @@ def add_to_avl(dict_words, new_word):
         letter = new_word[0]
 
         if letter == 'q':
-            if len(new_word) > 2:
+            if len(new_word) >= 2:
                 if new_word[1] == 'u':
                     letter = 'qu'
                 else:
