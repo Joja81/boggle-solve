@@ -1,5 +1,6 @@
 from board import Board
 from dice import Dice
+from solve_boggle import solve_boggle
 
 def generate_game():
     
@@ -13,7 +14,8 @@ def generate_game():
         
     board = Board(dice)
     
-    print(board.array_output())
+    return board
 
 if __name__ == "__main__":
-    generate_game()
+    board = generate_game()
+    solve_boggle(board)
