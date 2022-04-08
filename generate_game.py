@@ -23,7 +23,7 @@ def load_words():
     with open("english2.txt", "r") as file:
         for line in file:
             line = line.rstrip('\n')
-            words.append(line)
+            words.append(line.upper())
     return words
 
 if __name__ == "__main__":
@@ -32,4 +32,6 @@ if __name__ == "__main__":
     words = load_words()
     avl = Avl(words)
     
-    solve_avl(avl.return_avl(), board.array_output())
+    words = solve_avl(avl.return_avl(), board.array_output())
+    for key in words:
+        print(key)
