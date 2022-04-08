@@ -1,3 +1,4 @@
+from logging.handlers import BaseRotatingHandler
 from avl import Avl
 from board import Board
 from dice import Dice
@@ -27,6 +28,33 @@ def load_words():
             words.append(line.upper())
     return words
 
+def load_words_special(board):
+    #Only load words which are correct length and only contain the right letters
+    
+    
+    available_letters = set()
+    for x in range(len(board)):
+        for y in range(len(board)):
+            if board[x][y] == "Qu":
+                available_letters.add("Q")
+                available_letters.add("U")
+            else:
+                available_letters.add(board[x][y])
+    
+    words = []
+    with open("english2.txt", "r") as file:
+        for line in file:
+            word = line.rstrip('\n').upper()
+            
+            if len(word) >= 3 and set(word) <= available_letters:
+                words.append(word)
+                
+    return words
+    
+    
+
+    
+
 def solve_using_avl(board, words):
     avl = Avl(words)
     
@@ -40,8 +68,9 @@ def load_words_dict(words):
 
     return words_dict
 
-def solve_using_brute_force(load_words_dict, board, words):
+def solve_using_brute_force(board, words):
     words_dict = load_words_dict(words)
+    
 
     return brute_force(board.array_output(), words_dict)
 
@@ -67,17 +96,15 @@ if __name__ == "__main__":
         print()
     
     
-    words = load_words()
+    # words = load_words()
+    words = load_words_special(board.array_output())
     
-    solutions_brute = dict_to_list(solve_using_brute_force(load_words_dict, board, words))
-    solutions_brute.sort()
 
-    solutions_avl = dict_to_list(solve_using_avl(board, words))
-    solutions_avl.sort()
+    # solutions = dict_to_list(solve_using_brute_force( board, words))
+
+    solutions = dict_to_list(solve_using_avl(board, words))
+    solutions.sort()
     
-    if solutions_brute == solutions_avl:
-        print("--------Solutions--------")
-        for word in solutions_avl:
-            print(word)
-    else:
-        print("don't match")
+    print("--------Solutions--------")
+    for word in solutions:
+        print(word)

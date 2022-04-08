@@ -1,4 +1,4 @@
-found_words = {}
+found_words = set()
 
 def solve_avl(avl, board):
     for x in range(len(board)):
@@ -34,5 +34,5 @@ def calculate_word(used, board):
     word = word.capitalize()
 
 
-    if word not in found_words and len(word) >= 3:
-        found_words[word] = True
+    if len(word) >= 3:
+        found_words.add(word)
