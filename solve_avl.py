@@ -10,18 +10,17 @@ def solve_avl(avl, board):
 def explore_avl(used, avl, board):
     if "word" in avl:
         calculate_word(used, board)
-    for letter in avl:
-        if letter != "word":
-            x = used[-1][0] - 1
-            y = used[-1][1] - 1
-            for x_change in range(3):
-                for y_change in range(3):
-                    if (x + x_change) in range(len(board)) and (y + y_change) in range(len(board)):
-                        new_place = [x + x_change, y + y_change]
-                        if new_place not in used and board[new_place[0]][new_place[1]] in avl:
-                            new_used = used.copy()
-                            new_used.append(new_place)
-                            explore_avl(new_used, avl[board[new_place[0]][new_place[1]]], board)
+    
+    x = used[-1][0] - 1
+    y = used[-1][1] - 1
+    for x_change in range(3):
+        for y_change in range(3):
+            if (x + x_change) in range(len(board)) and (y + y_change) in range(len(board)):
+                new_place = [x + x_change, y + y_change]
+                if new_place not in used and board[new_place[0]][new_place[1]] in avl:
+                    new_used = used.copy()
+                    new_used.append(new_place)
+                    explore_avl(new_used, avl[board[new_place[0]][new_place[1]]], board)
 
     
 
