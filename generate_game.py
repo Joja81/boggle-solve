@@ -27,11 +27,24 @@ def load_words():
     return words
 
 if __name__ == "__main__":
+    
+    #Generate and display board
     board = generate_game()
+    
+    for line in board.array_output():
+        for letter in line:
+            if letter == "Qu":
+                print(f"{letter}|", end = " ")
+            else:
+                print(f"{letter} |", end = " ")
+        print()
+    
     
     words = load_words()
     avl = Avl(words)
     
+    
+    #Sovle
     words = solve_avl(avl.return_avl(), board.array_output())
     for key in words:
         print(key)
