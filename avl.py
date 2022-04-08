@@ -1,6 +1,5 @@
 from tokenize import Expfloat
 
-
 class Avl:
     def __init__(self, words):
         self.avl = {}

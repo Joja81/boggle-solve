@@ -32,4 +32,4 @@ if __name__ == "__main__":
     words = load_words()
     avl = Avl(words)
     
-    solve_avl(avl.return_avl, board.array_output)
+    solve_avl(avl.return_avl(), board.array_output())
