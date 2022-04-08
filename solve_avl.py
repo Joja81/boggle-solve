@@ -30,5 +30,9 @@ def calculate_word(used, board):
     word = ""
     for space in used:
         word += board[space[0]][space[1]]
+        
+    word = word.capitalize()
+
+
     if word not in found_words and len(word) >= 3:
         found_words[word] = True
