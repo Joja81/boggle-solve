@@ -26,10 +26,14 @@ def load_words():
             words.append(line)
     return words
 
+def solve_using_avl(board, words):
+    avl = Avl(words)
+    
+    solve_avl(avl.return_avl(), board.array_output())
+
 if __name__ == "__main__":
     board = generate_game()
     
     words = load_words()
-    avl = Avl(words)
     
-    solve_avl(avl.return_avl(), board.array_output())
+    solve_using_avl(board, words)
