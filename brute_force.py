@@ -4,12 +4,12 @@ def brute_force(board, words):
     for x in range(len(board)):
         for y in range(len(board)):
             used = [[x, y]]
-            explore_board(used,  words, board, board[x][y], board[x][y])
+            explore_board(used,  words, board, board[x][y])
 
     return found_words
 
 def explore_board(used, dict_words, board, word):
-    if word in dict_words:
+    if word in dict_words and len(word) >= 3:
         found_words[word.capitalize()] = True
     
     x = used[-1][0] - 1
