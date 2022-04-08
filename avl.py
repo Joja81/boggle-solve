@@ -1,3 +1,4 @@
+from operator import truediv
 from tokenize import Expfloat
 
 class Avl:
@@ -10,14 +11,39 @@ class Avl:
     def add_word(self, word):
         curr_avl = self.avl
         
-        for char in word:
-            if char in curr_avl:
-                curr_avl = curr_avl[char]
-            else:
-                curr_avl[char] = {}
-                curr_avl = curr_avl[char]
+        valid_word = True
         
-        curr_avl['word'] = True
+        # Check for qords with Q without a U
+        for i in range(len(word)):
+            if word[i] == "Q":
+                if i >= len(word) - 1 or word[i+1] != "U":
+                    valid_word = False
+        
+        
+        
+        if valid_word:
+            for i in range(len(word)):
+                
+                char = word[i]
+                
+                if char == "Q":
+                    i += 1
+                    char = "Qu"
+                
+                valid = True
+                
+                if char == "U" and i > 0:
+                    if word[i-1] == "Q":
+                        valid = False
+                
+                if valid:
+                    if char in curr_avl:
+                        curr_avl = curr_avl[char]
+                    else:
+                        curr_avl[char] = {}
+                        curr_avl = curr_avl[char]
+        
+            curr_avl['word'] = True
     
     def print_words(self):
         for letter in self.avl:
