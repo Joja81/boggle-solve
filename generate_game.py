@@ -1,7 +1,9 @@
+import imp
 from avl import Avl
 from board import Board
 from dice import Dice
 from solve_avl import solve_avl
+from brute_force import brute_force
 
 def generate_game():
     
@@ -31,6 +33,14 @@ def solve_using_avl(board, words):
     
     solve_avl(avl.return_avl(), board.array_output())
 
+def load_words_dict(words):
+    words_dict = {}
+
+    for word in words:
+        words_dict[word] = True
+
+    return words_dict
+
 if __name__ == "__main__":
     
     #Generate and display board
@@ -47,4 +57,8 @@ if __name__ == "__main__":
     
     words = load_words()
     
-    solve_using_avl(board, words)
+    words_dict = load_words_dict(words)
+
+    brute_force(words_dict, board)
+
+    # solve_using_avl(board, words)
