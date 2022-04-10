@@ -16,14 +16,43 @@ a {
 }
 
 .title {
-  margin: 0;
+  margin: 10;
   line-height: 1.15;
   font-size: 4rem;
+
 }
 
-.centered {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 0%);
-  text-align: center;
+.board {
+  border: 5px solid #FFCA08;
+  background-color: #398BD4;
+  padding: 5px;
+  margin-top: 20px;
+}
+
+.row {
+  display: flex;
+  text-align:center;
+  flex-direction:row;
+  padding: 5px;
+}
+
+.border {
+  border: 5px solid #ffca08;
+  background-color: #398bd4;
+  padding: 5px;
+  margin-top: 20px;
+}
+
+.boggle {
+  width: 80px;
+  height: 80px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  box-shadow: -4px 2px 8px 1px rgba(0,0,0,0.69);
+  flex:1 1 auto;
+  margin:5px;
+}
+
+.boggle.selected {
+  background-color: #ACCEEC;
 }
