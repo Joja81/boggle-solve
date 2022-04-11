@@ -1,7 +1,7 @@
 import Head from "next/head";
-import Image from "next/image";
 import { loadAvl } from "../functions/loadAvl";
 import { solveAvl } from "../functions/solveAvl";
+import { useRouter } from "next/router";
 
 /*
 TODO
@@ -13,6 +13,8 @@ TODO
 export default function Home() {
 
   const BOARD_SIZE = 4
+
+  const router = useRouter()
 
   const onSubmit = async (e) => {
     event.preventDefault();
@@ -37,13 +39,17 @@ export default function Home() {
         }
 
       }
+
       board.push(curr_row);
     }
 
     let avl = await loadAvl(availableWords)
 
     let solutions = solveAvl(avl, board)
-    console.log(solutions);
+    
+    console.log("Push")
+    router.push({ pathname: "/solutions", query: {solutions: solutions} });
+
 
   }
 
@@ -56,6 +62,7 @@ export default function Home() {
       </Head>
 
       <main>
+
         <h1 className={"title centered"}>Solve a boggle board</h1>
         <form onSubmit={() => onSubmit()} id="form">
           <Table height={BOARD_SIZE} width={BOARD_SIZE}/>
