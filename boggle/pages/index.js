@@ -27,7 +27,7 @@ export default function Home() {
       for(let j = 0; j < BOARD_SIZE; j++ ){
         let curr_id = i*BOARD_SIZE+j
 
-        let curr_value = values.elements["tileForm"+curr_id].value
+        let curr_value = lowerCase(values.elements["tileForm"+curr_id].value)
 
         curr_row.push(curr_value);
 
@@ -94,4 +94,14 @@ function Tile({id}){
   return <div className="boggle" id={"tile"+id}>
       <input id={"tileForm" + id} name={id} placeholder={id} required/>
   </div>
+}
+
+function lowerCase(word){
+  let arr = []
+
+  for(let i = 0; i < word.length; i++){
+    arr.push(word.charAt(i).toLowerCase())
+  }
+
+  return arr.join("")
 }
