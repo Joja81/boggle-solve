@@ -92,7 +92,8 @@ function Row({number, start}){
 
 function Tile({id}){
   return <div className="boggle" id={"tile"+id}>
-      <input id={"tileForm" + id} name={id} placeholder={id} required/>
+      <input id={"tileForm" + id} name={id} placeholder={"letter"} required />
+      
   </div>
 }
 
