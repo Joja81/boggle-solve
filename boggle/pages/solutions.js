@@ -23,7 +23,7 @@ function DisplaySolutions({ solutions }) {
   }
 
   return <div>
-      <h1>Solutions</h1>
+      <h1 className="title">Solutions</h1>
       {itemList}
     </div>
 }
