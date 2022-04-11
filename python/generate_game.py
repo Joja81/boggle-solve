@@ -105,6 +105,8 @@ if __name__ == "__main__":
     solutions = dict_to_list(solve_using_avl(board, words))
     solutions.sort()
     
-    # print("--------Solutions--------")
-    # for word in solutions:
-    #     print(word)
+    print(board.array_output())
+    
+    print(f"-------- {len(solutions)} solutions--------")
+    for word in solutions:
+        print(word)
