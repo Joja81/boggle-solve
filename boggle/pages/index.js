@@ -3,11 +3,19 @@ import Image from "next/image";
 import { loadAvl } from "../functions/loadAvl";
 import { solveAvl } from "../functions/solveAvl";
 
+/*
+TODO
+- Create solutions page
+- Screen and alter entries
+*/
+
+
 export default function Home() {
 
   const BOARD_SIZE = 4
 
   const onSubmit = async (e) => {
+    event.preventDefault();
 
     let availableWords = new Set();
 

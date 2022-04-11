@@ -1,11 +1,9 @@
 var foundWords = new Set()
 
 export const solveAvl = (avl, board) => {
-    console.log(avl);
     for(let x = 0; x < board.length; x++){
         for(let y = 0; y < board.length; y++){
             let used = [[x,y]];
-            console.log(board[x][y])
             exploreAvl(used, avl[board[x][y]], board);
         }
     }
@@ -20,8 +18,6 @@ export const solveAvl = (avl, board) => {
 
 function exploreAvl(used, avl, board){
 
-    console.log(avl)
-
     if ("word" in avl){
         calculateWord(used, board);
     }
@@ -35,8 +31,6 @@ function exploreAvl(used, avl, board){
             let newPlace = [x+xChange, y+yChange];
 
             if (validLocation(newPlace, board.length)){
-                console.log("original x:" + x + "original y:" + y);
-                console.log("new x:" + newPlace[0] + "new y:" + newPlace[1]);
                 if (visitedLocation(used, newPlace) && (board[newPlace[0]][newPlace[1]] in avl)){
                     let newUsed = used.slice();
                     newUsed.push(newPlace);
