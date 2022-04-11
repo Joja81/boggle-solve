@@ -40,38 +40,6 @@ export default function Home() {
 
   }
 
-  const test = async () => {
-
-    let availableWords = new Set();
-
-    availableWords.add("n")
-    availableWords.add("h")
-    availableWords.add("a")
-    availableWords.add("y")
-    availableWords.add("u")
-    availableWords.add("v")
-    availableWords.add("b")
-    availableWords.add("h")
-    availableWords.add("s")
-    availableWords.add("w")
-    availableWords.add("n")
-    availableWords.add("g")
-    availableWords.add("f")
-    availableWords.add("a")
-    availableWords.add("w")
-    availableWords.add("p")
-
-
-    let avl = await loadAvl(availableWords)
-
-
-    let board = [['n', 'h', 'a', 'y'], ['u', 'v', 'b', 'h'], ['s', 'w', 'n', 'g'], ['f', 'a', 'w', 'p']]
-
-    let solutions = solveAvl(avl, board)
-
-    console.log(solutions);
-  }
-
   return (
     <div>
       <Head>
@@ -82,9 +50,6 @@ export default function Home() {
 
       <main>
         <h1 className={"title centered"}>Solve a boggle board</h1>
-        <button onClick={() => test()}>
-          Test
-        </button>
         <form onSubmit={() => onSubmit()} id="form">
           <Table height={BOARD_SIZE} width={BOARD_SIZE}/>
           <button type="submit">Enter</button>
