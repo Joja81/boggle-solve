@@ -26,15 +26,22 @@ export default function Home() {
       let curr_row = []
       for(let j = 0; j < BOARD_SIZE; j++ ){
         let curr_id = i*BOARD_SIZE+j
-        curr_row.push(values.elements["tileForm"+curr_id].value);
 
-        availableWords.add(values.elements["tileForm"+curr_id].value)
+        let curr_value = values.elements["tileForm"+curr_id].value
+
+        curr_row.push(curr_value);
+
+
+        for(let k = 0; k < curr_value.length; k++){
+          availableWords.add(curr_value.charAt(k))
+        }
 
       }
       board.push(curr_row);
     }
 
     let avl = await loadAvl(availableWords)
+
     let solutions = solveAvl(avl, board)
     console.log(solutions);
 

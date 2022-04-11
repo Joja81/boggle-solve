@@ -38,8 +38,8 @@ function checkWord(word, availableWords) {
     }
 
     //Checks that if Q occurs there is always a U after it
-    if (word.charAt(i) == "Q") {
-      if (i >= word.length || word.charAt(i + 1) != "U") {
+    if (word.charAt(i) == "q") {
+      if (i >= word.length || word.charAt(i + 1) != "u") {
         valid = false;
       }
     }
@@ -55,12 +55,12 @@ function addWord(word) {
 
     let valid = true;
 
-    if (char == "Q") {
-      char = "Qu";
+    if (char == "q") {
+      char = "qu";
     }
 
-    if (char == "U" && i > 0) {
-      if (word.charAt(i - 1) == "Q") {
+    if (char == "u" && i > 0) {
+      if (word.charAt(i - 1) == "q") {
         valid = false;
       }
     }
