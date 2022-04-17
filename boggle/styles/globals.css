@@ -16,15 +16,22 @@ a {
 }
 
 .title {
-  margin: 10;
+  margin-top: 10px;
+  margin-bottom: 10px;
   line-height: 1.15;
   font-size: 4rem;
+  color: #FFB703;
+}
 
+.warning {
+  color: red;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .board {
-  border: 5px solid #FFCA08;
-  background-color: #398BD4;
+  border: 5px solid #FB8500;
+  background-color: #219EBC;
   padding: 5px;
   margin-top: 20px;
 }
@@ -55,4 +62,35 @@ a {
 
 .boggle.selected {
   background-color: #ACCEEC;
+}
+
+.input{
+  border: 2px solid black;
+  margin: 5%;
+  border-radius: 12px;
+}
+
+.input-red{
+  border: 2px solid red;
+  margin: 5%;
+  border-radius: 12px;
+  background-color: red;
+}
+
+.btn,
+button {
+  background-color: #ffca08;
+  border: none;
+  color: var(--color-text);
+  padding: 1rem 2rem;
+  display: inline-block;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  text-decoration: none;
+  font-family: "Noto Sans", sans-serif;
+  font-weight: bold;
+  border-radius: 5rem;
+  cursor: pointer;
+  margin: 0.5rem 1rem 0.5rem 1rem;
 }
