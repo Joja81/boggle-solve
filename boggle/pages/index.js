@@ -3,15 +3,25 @@ import { loadAvl } from "../functions/loadAvl";
 import { solveAvl } from "../functions/solveAvl";
 import { useRouter } from "next/router";
 import { useState } from "react";
-
-/*
-TODO
-- Create solutions page
-- Screen and alter entries
-*/
+import { useContext } from "react";
+import { UserContext } from "../lib/context";
 
 export default function Home() {
+
+  let {letters} = useContext(UserContext);
+
   const BOARD_SIZE = 4;
+
+  if (!letters){
+    letters = []
+    for (let i = 0; i < BOARD_SIZE; i++){
+      let curr = [];
+      for (let j = 0; j < BOARD_SIZE; j++){
+        curr.push("d");
+      }
+      letters.push(curr)
+    }
+  }
 
   const router = useRouter();
 
@@ -82,7 +92,7 @@ export default function Home() {
       <main>
         <h1 className={"title"}>Solve a boggle board</h1>
         <form onSubmit={() => onSubmit()} onChange={() => onChange()} id="form">
-          <Table height={BOARD_SIZE} width={BOARD_SIZE} />
+          <Table letters = {letters}/>
           {!valid ? <h3 className="warning">You must only enter valid boggle </h3> : <></>}
           <button type="submit" disabled={!valid}>
             Enter
@@ -93,10 +103,13 @@ export default function Home() {
   );
 }
 
-function Table({ height, width }) {
+function Table({ letters }) {
+
+  console.log(letters);
+
   let itemList = [];
-  for (let y = 0; y < height; y++) {
-    itemList.push(<Row number={width} start={width * y} key={"row" + y} />);
+  for (let y = 0; y < letters.length; y++) {
+    itemList.push(<Row number={letters.length} start={letters.length * y} letters={letters[y]} key={"row" + y} />);
   }
 
   return (
@@ -106,11 +119,11 @@ function Table({ height, width }) {
   );
 }
 
-function Row({ number, start }) {
+function Row({ number, start, letters }) {
   let itemList = [];
 
-  for (let i = start; i < number + start; i++) {
-    itemList.push(<Tile id={i} key={"tile" + i} />);
+  for (let i = 0; i < number; i++) {
+    itemList.push(<Tile id={i + start} letter={letters[i]} key={"tile" + (i + start)} />);
   }
 
   return (
@@ -120,7 +133,7 @@ function Row({ number, start }) {
   );
 }
 
-function Tile({ id }) {
+function Tile({ id, letter }) {
   const [valid, setValid] = useState(true);
 
   const onChange = (e) => {
@@ -141,6 +154,7 @@ function Tile({ id }) {
           maxLength={2}
           type={"text"}
           onChange={onChange}
+          value={letter}
         />
     </div>
   );
