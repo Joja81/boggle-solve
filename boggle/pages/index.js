@@ -130,9 +130,9 @@ function Tile({ id }) {
   };
 
   return (
-    <div className="boggle" id={"tile" + id}>
-      {valid ? (
-        <input
+
+    <div className={valid ? "boggle" : "boggle red"}  id={"tile" + id}>
+      <input
           id={"tileForm" + id}
           className={"input"}
           name={id}
@@ -142,18 +142,6 @@ function Tile({ id }) {
           type={"text"}
           onChange={onChange}
         />
-      ) : (
-        <input
-          id={"tileForm" + id}
-          className={"input-red"}
-          name={id}
-          placeholder={"letter"}
-          required
-          maxLength={2}
-          type={"text"}
-          onChange={onChange}
-        />
-      )}
     </div>
   );
 }
@@ -198,6 +186,8 @@ function validEntry(entry) {
     "y",
     "z",
   ];
+
+  if (entry.length == 0) return true;
 
   for (let i = 0; i < valid_entries.length; i++) {
     if (valid_entries[i] == entry) {

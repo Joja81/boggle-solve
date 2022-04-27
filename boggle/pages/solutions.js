@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 export default function Solutions() {
@@ -22,10 +23,17 @@ function DisplaySolutions({ solutions }) {
     itemList.push(<Solution solution={solutions[i]} key={"solution" + i} />);
   }
 
-  return <div>
+  return <>
       <h1 className="title">Solutions</h1>
-      {itemList}
-    </div>
+      <div className="split">
+        {itemList}
+      </div>
+      <Link href={"/"} passHref>
+      <button>
+        Back
+      </button>
+      </Link>
+    </>
 }
 
 function Solution({ solution }) {

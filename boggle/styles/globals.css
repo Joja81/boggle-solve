@@ -43,6 +43,10 @@ a {
   padding: 5px;
 }
 
+.split{
+  column-count: 3;
+}
+
 .border {
   border: 5px solid #ffca08;
   background-color: #398bd4;
@@ -60,6 +64,10 @@ a {
   margin:5px;
 }
 
+.red {
+  background-color: red;
+}
+
 .boggle.selected {
   background-color: #ACCEEC;
 }
@@ -68,13 +76,6 @@ a {
   border: 2px solid black;
   margin: 5%;
   border-radius: 12px;
-}
-
-.input-red{
-  border: 2px solid red;
-  margin: 5%;
-  border-radius: 12px;
-  background-color: red;
 }
 
 .btn,
