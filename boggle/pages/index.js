@@ -8,7 +8,7 @@ import { UserContext } from "../lib/context";
 
 export default function Home() {
 
-  let {letters, setLetters} = useContext(UserContext);
+  const {letters, setLetters, setSolutions} = useContext(UserContext);
 
   const BOARD_SIZE = 4;
 
@@ -68,9 +68,9 @@ export default function Home() {
 
     let solutions = solveAvl(avl, board);
 
-    
+    setSolutions(solutions)
 
-    router.push({ pathname: "/solutions", query: { solutions: solutions } });
+    router.push({ pathname: "/solutions" });
   };
 
   return (

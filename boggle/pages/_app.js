@@ -6,9 +6,11 @@ import {generateLetters} from "../functions/generateLetters"
 function MyApp({ Component, pageProps }) {
 
   const [letters, setLetters] = useState(generateLetters(4))
+  
+  const [solutions, setSolutions] = useState(null)
 
 
-  return <UserContext.Provider value={{letters, setLetters}}>
+  return <UserContext.Provider value={{letters, setLetters, solutions, setSolutions}}>
     <Component {...pageProps} />
   </UserContext.Provider>
 
