@@ -64,8 +64,6 @@ export default function Home() {
 
     let avl = await loadAvl(availableWords);
 
-    console.log(board);
-
     setLetters(board)
 
     let solutions = solveAvl(avl, board);
