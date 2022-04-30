@@ -118,3 +118,7 @@ button {
   padding-right: 0px;
   padding-top: 5px;
 }
+
+.clickable{
+  cursor: pointer;
+}

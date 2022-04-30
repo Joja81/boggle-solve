@@ -53,7 +53,7 @@ function Solution({ solution, setUsed }) {
     setUsed(solution['used'])
   }
 
-  return <div onClick={onClick}>{solution['word']}</div>;
+  return <div className="clickable" onClick={onClick}>{solution['word']}</div>;
 }
 
 function Board({board, used}){
