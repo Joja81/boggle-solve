@@ -1,25 +1,26 @@
-var foundWords = new Set()
-
 export const solveAvl = (avl, board) => {
+
+    let foundWords = new Set()
+
     for(let x = 0; x < board.length; x++){
         for(let y = 0; y < board.length; y++){
             let used = [[x,y]];
-            exploreAvl(used, avl[board[x][y]], board);
+            exploreAvl(used, avl[board[x][y]], board, foundWords);
         }
     }
 
     
-    let solutions = computeSolutions()
+    let solutions = computeSolutions(foundWords)
 
     solutions.sort()
 
     return solutions
 }
 
-function exploreAvl(used, avl, board){
+function exploreAvl(used, avl, board, foundWords){
 
     if ("word" in avl){
-        calculateWord(used, board);
+        calculateWord(used, board, foundWords);
     }
 
     let x = used[used.length - 1][0]
@@ -34,7 +35,7 @@ function exploreAvl(used, avl, board){
                 if (visitedLocation(used, newPlace) && (board[newPlace[0]][newPlace[1]] in avl)){
                     let newUsed = used.slice();
                     newUsed.push(newPlace);
-                    exploreAvl(newUsed, avl[board[newPlace[0]][newPlace[1]]], board)
+                    exploreAvl(newUsed, avl[board[newPlace[0]][newPlace[1]]], board, foundWords)
                 }
             }
 
@@ -66,7 +67,7 @@ function visitedLocation(used, newPlace){
     return valid;
 }
 
-function calculateWord(used, board){
+function calculateWord(used, board, foundWords){
     let word = ""
     
     used.forEach(element => {
@@ -95,7 +96,7 @@ function capataliseWord(word){
     return arr.join("");
 }
 
-function computeSolutions(){
+function computeSolutions(foundWords){
 
     let arr = []
 

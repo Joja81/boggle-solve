@@ -8,24 +8,13 @@ import { UserContext } from "../lib/context";
 
 export default function Home() {
 
-  let {letters} = useContext(UserContext);
+  let {letters, setLetters} = useContext(UserContext);
 
   const BOARD_SIZE = 4;
 
-  if (!letters){
-    letters = []
-    for (let i = 0; i < BOARD_SIZE; i++){
-      let curr = [];
-      for (let j = 0; j < BOARD_SIZE; j++){
-        curr.push("d");
-      }
-      letters.push(curr)
-    }
-  }
-
   const router = useRouter();
 
-  const [valid, setValid] = useState(false);
+  const [valid, setValid] = useState(letters != null);
 
   const onChange = (e) => {
     setValid(false);
@@ -75,9 +64,14 @@ export default function Home() {
 
     let avl = await loadAvl(availableWords);
 
+    console.log(board);
+
+    setLetters(board)
+
     let solutions = solveAvl(avl, board);
 
-    console.log("Push");
+    
+
     router.push({ pathname: "/solutions", query: { solutions: solutions } });
   };
 
@@ -105,11 +99,9 @@ export default function Home() {
 
 function Table({ letters }) {
 
-  console.log(letters);
-
   let itemList = [];
   for (let y = 0; y < letters.length; y++) {
-    itemList.push(<Row number={letters.length} start={letters.length * y} letters={letters[y]} key={"row" + y} />);
+    itemList.push(<Row start={letters.length * y} letters={letters} column={y} key={"row" + y} />);
   }
 
   return (
@@ -119,11 +111,11 @@ function Table({ letters }) {
   );
 }
 
-function Row({ number, start, letters }) {
+function Row({ start, column, letters }) {
   let itemList = [];
 
-  for (let i = 0; i < number; i++) {
-    itemList.push(<Tile id={i + start} letter={letters[i]} key={"tile" + (i + start)} />);
+  for (let i = 0; i < letters.length; i++) {
+    itemList.push(<Tile id={i + start} letters={letters}column={column} row={i} key={"tile" + (i + start)} />);
   }
 
   return (
@@ -133,13 +125,18 @@ function Row({ number, start, letters }) {
   );
 }
 
-function Tile({ id, letter }) {
+function Tile({ id, letters, column, row }) {
+
   const [valid, setValid] = useState(true);
+
+  const [currLetter, setCurrLetter] = useState(letters[column][row]);
 
   const onChange = (e) => {
     let val = lowerCase(e.target.value);
 
     setValid(validEntry(val));
+
+    setCurrLetter(e.target.value)
   };
 
   return (
@@ -149,18 +146,18 @@ function Tile({ id, letter }) {
           id={"tileForm" + id}
           className={"input"}
           name={id}
-          placeholder={"letter"}
+          placeholder={"Column: " + column + " Row: " + row}
           required
           maxLength={2}
-          type={"text"}
           onChange={onChange}
-          value={letter}
+          value={currLetter}
         />
     </div>
   );
 }
 
 function lowerCase(word) {
+
   let arr = [];
 
   for (let i = 0; i < word.length; i++) {
