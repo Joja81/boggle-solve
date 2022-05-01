@@ -122,3 +122,7 @@ button {
 .clickable{
   cursor: pointer;
 }
+
+.letter{
+  margin: 3px;
+}

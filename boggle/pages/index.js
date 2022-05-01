@@ -144,7 +144,7 @@ function Tile({ id, letters, column, row }) {
           id={"tileForm" + id}
           className={"input"}
           name={id}
-          placeholder={"Column: " + column + " Row: " + row}
+          placeholder={"Letter"}
           required
           maxLength={2}
           onChange={onChange}
