@@ -5,7 +5,7 @@ import {generateLetters} from "../functions/generateLetters"
 
 function MyApp({ Component, pageProps }) {
 
-  const [letters, setLetters] = useState(generateLetters(4))
+  const [letters, setLetters] = useState(generateLetters(4, null))
   
   const [solutions, setSolutions] = useState(null)
 

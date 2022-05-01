@@ -5,16 +5,26 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useContext } from "react";
 import { UserContext } from "../lib/context";
+import { generateLetters } from "../functions/generateLetters";
 
 export default function Home() {
-
-  const {letters, setLetters, setSolutions} = useContext(UserContext);
-
-  const BOARD_SIZE = 4;
+  const { letters, setLetters, setSolutions } = useContext(UserContext);
 
   const router = useRouter();
 
   const [valid, setValid] = useState(letters != null);
+
+  const boardSizeChange = (e) => {
+    let val = e.target.value;
+
+    let currLetters = loadBoard(letters.length)
+
+    console.log(currLetters);
+
+    let newLetters = generateLetters(val, currLetters);
+
+    setLetters(newLetters);
+  };
 
   const onChange = (e) => {
     setValid(false);
@@ -23,9 +33,9 @@ export default function Home() {
 
     const values = document.getElementById("form");
 
-    for (let i = 0; i < BOARD_SIZE; i++) {
-      for (let j = 0; j < BOARD_SIZE; j++) {
-        let curr_id = i * BOARD_SIZE + j;
+    for (let i = 0; i < letters.length; i++) {
+      for (let j = 0; j < letters.length; j++) {
+        let curr_id = i * letters.length + j;
         let curr_value = lowerCase(values.elements["tileForm" + curr_id].value);
 
         if (!validEntry(curr_value)) {
@@ -45,10 +55,10 @@ export default function Home() {
     const values = document.getElementById("form");
 
     let board = [];
-    for (let i = 0; i < BOARD_SIZE; i++) {
+    for (let i = 0; i < letters.length; i++) {
       let curr_row = [];
-      for (let j = 0; j < BOARD_SIZE; j++) {
-        let curr_id = i * BOARD_SIZE + j;
+      for (let j = 0; j < letters.length; j++) {
+        let curr_id = i * letters.length + j;
 
         let curr_value = lowerCase(values.elements["tileForm" + curr_id].value);
 
@@ -64,11 +74,11 @@ export default function Home() {
 
     let avl = await loadAvl(availableWords);
 
-    setLetters(board)
+    setLetters(board);
 
     let solutions = solveAvl(avl, board);
 
-    setSolutions(solutions)
+    setSolutions(solutions);
 
     router.push({ pathname: "/solutions" });
   };
@@ -83,9 +93,25 @@ export default function Home() {
 
       <main>
         <h1 className={"title"}>Solve a boggle board</h1>
+
+        <form>
+          <h2>Board size</h2>
+          <input
+            value={letters.length}
+            type={"number"}
+            min={2}
+            max={10}
+            onChange={boardSizeChange}
+          />
+        </form>
+
         <form onSubmit={() => onSubmit()} onChange={() => onChange()} id="form">
-          <Table letters = {letters}/>
-          {!valid ? <h3 className="warning">You must only enter valid boggle </h3> : <></>}
+          <Table letters={letters} />
+          {!valid ? (
+            <h3 className="warning">You must only enter valid boggle </h3>
+          ) : (
+            <></>
+          )}
           <button type="submit" disabled={!valid}>
             Enter
           </button>
@@ -96,10 +122,16 @@ export default function Home() {
 }
 
 function Table({ letters }) {
-
   let itemList = [];
   for (let y = 0; y < letters.length; y++) {
-    itemList.push(<Row start={letters.length * y} letters={letters} column={y} key={"row" + y} />);
+    itemList.push(
+      <Row
+        start={letters.length * y}
+        letters={letters}
+        column={y}
+        key={"row" + y}
+      />
+    );
   }
 
   return (
@@ -113,7 +145,15 @@ function Row({ start, column, letters }) {
   let itemList = [];
 
   for (let i = 0; i < letters.length; i++) {
-    itemList.push(<Tile id={i + start} letters={letters}column={column} row={i} key={"tile" + (i + start)} />);
+    itemList.push(
+      <Tile
+        id={i + start}
+        letters={letters}
+        column={column}
+        row={i}
+        key={"tile" + (i + start)}
+      />
+    );
   }
 
   return (
@@ -124,7 +164,6 @@ function Row({ start, column, letters }) {
 }
 
 function Tile({ id, letters, column, row }) {
-
   const [valid, setValid] = useState(true);
 
   const [currLetter, setCurrLetter] = useState(letters[column][row]);
@@ -134,28 +173,26 @@ function Tile({ id, letters, column, row }) {
 
     setValid(validEntry(val));
 
-    setCurrLetter(e.target.value)
+    setCurrLetter(e.target.value);
   };
 
   return (
-
-    <div className={valid ? "boggle" : "boggle red"}  id={"tile" + id}>
+    <div className={valid ? "boggle" : "boggle red"} id={"tile" + id}>
       <input
-          id={"tileForm" + id}
-          className={"input"}
-          name={id}
-          placeholder={"Letter"}
-          required
-          maxLength={2}
-          onChange={onChange}
-          value={currLetter}
-        />
+        id={"tileForm" + id}
+        className={"input"}
+        name={id}
+        placeholder={"Letter"}
+        required
+        maxLength={2}
+        onChange={onChange}
+        value={currLetter}
+      />
     </div>
   );
 }
 
 function lowerCase(word) {
-
   let arr = [];
 
   for (let i = 0; i < word.length; i++) {
@@ -205,4 +242,25 @@ function validEntry(entry) {
   }
 
   return false;
+}
+
+function loadBoard(board_size) {
+  const values = document.getElementById("form");
+
+  let board = [];
+
+  for (let i = 0; i < board_size; i++) {
+    let curr_row = [];
+    for (let j = 0; j < board_size; j++) {
+      let curr_id = i * board_size + j;
+
+      let curr_value = lowerCase(values.elements["tileForm" + curr_id].value);
+
+      curr_row.push(curr_value);
+    }
+
+    board.push(curr_row)
+  }
+
+  return board;
 }
