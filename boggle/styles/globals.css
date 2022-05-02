@@ -15,12 +15,21 @@ a {
   box-sizing: border-box;
 }
 
+main{
+  margin-left: 5%;
+}
+
+h2{
+  color: #398bd4;
+}
+
 .title {
   margin-top: 10px;
   margin-bottom: 10px;
   line-height: 1.15;
   font-size: 4rem;
-  color: #FFB703;
+  color: #ffb703;
+  
 }
 
 .warning {
@@ -30,21 +39,35 @@ a {
 }
 
 .board {
-  border: 5px solid #FB8500;
-  background-color: #219EBC;
+  border: 5px solid #fb8500;
+  background-color: #219ebc;
   padding: 5px;
   margin-top: 20px;
+  width: fit-content;
 }
 
 .row {
   display: flex;
-  text-align:center;
-  flex-direction:row;
+  text-align: center;
+  flex-direction: row;
   padding: 5px;
+  width: 50%;
 }
 
-.split{
+.split {
   column-count: 3;
+}
+
+.center-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.center-content{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .border {
@@ -55,13 +78,15 @@ a {
 }
 
 .boggle {
-  width: 80px;
-  height: 80px;
+  aspect-ratio: 1/1;
   border-radius: 5px;
   background-color: #ffffff;
-  box-shadow: -4px 2px 8px 1px rgba(0,0,0,0.69);
-  flex:1 1 auto;
-  margin:5px;
+  flex: 1 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  margin: 5px;
 }
 
 .red {
@@ -69,13 +94,21 @@ a {
 }
 
 .boggle.selected {
-  background-color: #ACCEEC;
+  background-color: #acceec;
 }
 
-.input{
-  border: 2px solid black;
+.input {
+  text-align: center;
+  border: none;
+  border-bottom: 2px solid black;
   margin: 5%;
-  border-radius: 12px;
+  font-size: 40px;
+  width: 4ch;
+}
+
+.input:focus {
+  outline: none;
+  border-bottom: 2px solid black;
 }
 
 .btn,
@@ -105,24 +138,24 @@ button {
 }
 
 .selected {
-  background-color: #ACCEEC;
+  background-color: #acceec;
 }
 
 .first {
   background-color: red;
 }
 
-.column{
+.column {
   display: inline-flex;
   padding-left: 0px;
   padding-right: 0px;
   padding-top: 5px;
 }
 
-.clickable{
+.clickable {
   cursor: pointer;
 }
 
-.letter{
+.letter {
   margin: 3px;
 }
