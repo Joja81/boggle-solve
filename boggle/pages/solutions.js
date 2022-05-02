@@ -52,8 +52,9 @@ function Solution({ solution, setUsed }) {
     console.log("selecting");
     setUsed(solution['used'])
   }
+  
 
-  return <div className="clickable letter" onClick={onClick}>{solution['word']}</div>;
+  return <div><h3 className="letter" onMouseEnter={onClick}>{solution['word']}</h3></div>;
 }
 
 function Board({board, used}){
